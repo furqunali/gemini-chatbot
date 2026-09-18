@@ -1,20 +1,44 @@
 # 🤖 Gemini AI Chatbot (Async)
 
-An **asynchronous Python chatbot** built on Google's Generative AI API — an educational assistant that streams responses using `async`/`await`.
+An asynchronous Python chatbot built around Google's Generative AI API.
 
 ## Features
 
-- Async client over the Google GenerativeAI API
-- Conversational, educational-assistant prompt style
-- Compact, readable single-file implementation
+- Async Gemini responses using `async`/`await`
+- API key loaded from `GEMINI_API_KEY`
+- Configurable model through `GEMINI_MODEL`
+- Clear validation for missing credentials and empty prompts
+- Basic automated tests for input validation
 
 ## Setup
 
+Install dependencies:
+
 ```bash
-pip install google-generativeai python-dotenv
-echo "API_KEY=your_key_here" > .env
+pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```env
+GEMINI_API_KEY=your-gemini-api-key
+GEMINI_MODEL=gemini-1.5-flash
+```
+
+Run the chatbot:
+
+```bash
 python projects12.py
 ```
+
+Run tests:
+
+```bash
+pip install pytest
+pytest
+```
+
+Never commit a real API key. Use `.env.example` as the template for local configuration.
 
 ---
 
