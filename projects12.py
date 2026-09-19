@@ -43,7 +43,12 @@ class ChatBot:
 
 
 async def main():
-    bot = ChatBot()
+    try:
+        bot = ChatBot()
+    except Exception as exc:
+        print(f"Gemini Bot: startup error: {exc}")
+        return
+
     print("Gemini Bot: Hello! Type 'quit' to exit.\n")
 
     while True:
