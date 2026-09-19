@@ -45,7 +45,10 @@ async def main():
         if user_input.lower() in ("quit", "exit"):
             break
 
-        response = await bot.chat(user_input)
+        try:
+            response = await bot.chat(user_input)
+        except Exception as exc:
+            response = f"Bot Error: {exc}"
         print(f"Bot: {response}\n")
 
 
