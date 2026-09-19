@@ -33,6 +33,13 @@ class EmptyResponseModel:
         return type("Response", (), {"text": "   "})()
 
 
+def test_chat_treats_none_prompt_as_empty():
+    bot = ChatBot.__new__(ChatBot)
+    bot.model = FakeModel()
+    result = asyncio.run(bot.chat(None))
+    assert result == "Please enter a message."
+
+
 def test_chat_strips_prompt_before_generation():
     bot = ChatBot.__new__(ChatBot)
     bot.model = FakeModel()

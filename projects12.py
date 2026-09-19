@@ -28,7 +28,7 @@ class ChatBot:
 
     async def chat(self, prompt):
         """Generate a response for a single user prompt."""
-        prompt = prompt.strip()
+        prompt = (prompt or "").strip()
         if not prompt:
             return "Please enter a message."
 
