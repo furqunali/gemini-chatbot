@@ -16,8 +16,9 @@ class ChatBot:
         self._service = ChatService(self.model)
     async def chat(self, prompt):
         """Generate a response for a single user prompt."""
+        service = getattr(self, "_service", ChatService(self.model))
         try:
-            return await self._service.generate(prompt)
+            return await service.generate(prompt)
         except Exception as exc:
             return f"Bot Error: {exc}"
 async def main():
