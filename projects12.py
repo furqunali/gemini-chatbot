@@ -31,7 +31,10 @@ class ChatBot:
 
         try:
             response = await self.model.generate_content_async(prompt)
-            return response.text
+            text = getattr(response, "text", None)
+            if not isinstance(text, str) or not text.strip():
+                return "Bot Error: Gemini returned an empty response."
+            return text.strip()
         except Exception as exc:
             return f"Bot Error: {exc}"
 
