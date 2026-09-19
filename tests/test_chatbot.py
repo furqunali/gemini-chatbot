@@ -80,6 +80,19 @@ def test_blank_model_override_is_rejected(monkeypatch):
         ChatBot(model_name="   ")
 
 
+def test_main_reports_startup_error(monkeypatch, capsys):
+    import projects12
+
+    monkeypatch.setattr(
+        "projects12.ChatBot",
+        lambda: (_ for _ in ()).throw(ValueError("missing configuration")),
+    )
+
+    asyncio.run(projects12.main())
+
+    assert "startup error: missing configuration" in capsys.readouterr().out
+
+
 def test_main_exits_cleanly_on_eof(monkeypatch, capsys):
     import projects12
 
