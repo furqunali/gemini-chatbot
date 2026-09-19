@@ -4,26 +4,18 @@ import asyncio
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
+from chatbot_config import get_api_key, get_model_name
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+load_dotenv()
 
 
 class ChatBot:
     """Small async wrapper around the Gemini text-generation API."""
 
     def __init__(self, api_key=None, model_name=None):
-        api_key = api_key or GEMINI_API_KEY
-        if not api_key:
-            raise ValueError(
-                "GEMINI_API_KEY is required. Add it to the environment or .env file."
-            )
-
+        api_key = api_key or get_api_key()
         genai.configure(api_key=api_key)
-        selected_model = (model_name or GEMINI_MODEL).strip()
-        if not selected_model:
-            raise ValueError("GEMINI_MODEL must not be empty.")
+        selected_model = get_model_name(model_name)
         self.model = genai.GenerativeModel(selected_model)
 
     async def chat(self, prompt):
