@@ -9,6 +9,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
+
 class ChatBot:
     """Small async wrapper around the Gemini text-generation API."""
 
@@ -40,13 +41,20 @@ class ChatBot:
         except Exception as exc:
             return f"Bot Error: {exc}"
 
+
 async def main():
     bot = ChatBot()
     print("Gemini Bot: Hello! Type 'quit' to exit.\n")
 
     while True:
-        user_input = input("You: ").strip()
+        try:
+            user_input = input("You: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nGemini Bot: Goodbye!")
+            break
+
         if user_input.lower() in ("quit", "exit"):
+            print("Gemini Bot: Goodbye!")
             break
 
         try:
@@ -54,6 +62,7 @@ async def main():
         except Exception as exc:
             response = f"Bot Error: {exc}"
         print(f"Bot: {response}\n")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
