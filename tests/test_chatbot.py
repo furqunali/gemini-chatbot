@@ -14,8 +14,7 @@ def test_requires_api_key(monkeypatch):
 def test_empty_prompt_returns_helpful_message(monkeypatch):
     monkeypatch.setenv("GEMINI_API_KEY", "test-key")
     bot = ChatBot()
-    result = asyncio.run(bot.chat("   "))
-    assert result == "Please enter a message."
+    assert asyncio.run(bot.chat("   ")) == "Please enter a message."
 
 
 class FakeModel:
@@ -63,59 +62,38 @@ def test_chat_handles_empty_model_response():
 
 def test_model_override_is_trimmed_and_used(monkeypatch):
     captured = {}
-    monkeypatch.setattr("projects12.GEMINI_API_KEY", "test-key")
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
     monkeypatch.setattr("projects12.genai.configure", lambda api_key: None)
-    monkeypatch.setattr(
-        "projects12.genai.GenerativeModel",
-        lambda name: captured.setdefault("name", name),
-    )
+    monkeypatch.setattr("projects12.genai.GenerativeModel", lambda name: captured.setdefault("name", name))
     bot = ChatBot(model_name="  gemini-test-model  ")
     assert captured["name"] == "gemini-test-model"
     assert bot.model == "gemini-test-model"
 
 
 def test_blank_model_override_is_rejected(monkeypatch):
-    monkeypatch.setattr("projects12.GEMINI_API_KEY", "test-key")
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
     with pytest.raises(ValueError, match="GEMINI_MODEL must not be empty"):
         ChatBot(model_name="   ")
 
 
 def test_main_reports_startup_error(monkeypatch, capsys):
     import projects12
-
-    monkeypatch.setattr(
-        "projects12.ChatBot",
-        lambda: (_ for _ in ()).throw(ValueError("missing configuration")),
-    )
-
+    monkeypatch.setattr("projects12.ChatBot", lambda: (_ for _ in ()).throw(ValueError("missing configuration")))
     asyncio.run(projects12.main())
-
     assert "startup error: missing configuration" in capsys.readouterr().out
 
 
 def test_main_exits_cleanly_on_eof(monkeypatch, capsys):
     import projects12
-
     monkeypatch.setattr("projects12.ChatBot", lambda: object())
-
-    def raise_eof(_prompt):
-        raise EOFError
-
-    monkeypatch.setattr("builtins.input", raise_eof)
+    monkeypatch.setattr("builtins.input", lambda _prompt: (_ for _ in ()).throw(EOFError))
     asyncio.run(projects12.main())
-
     assert "Goodbye!" in capsys.readouterr().out
 
 
 def test_main_exits_cleanly_on_keyboard_interrupt(monkeypatch, capsys):
     import projects12
-
     monkeypatch.setattr("projects12.ChatBot", lambda: object())
-
-    def raise_interrupt(_prompt):
-        raise KeyboardInterrupt
-
-    monkeypatch.setattr("builtins.input", raise_interrupt)
+    monkeypatch.setattr("builtins.input", lambda _prompt: (_ for _ in ()).throw(KeyboardInterrupt))
     asyncio.run(projects12.main())
-
     assert "Goodbye!" in capsys.readouterr().out
