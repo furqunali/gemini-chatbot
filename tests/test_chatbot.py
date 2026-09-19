@@ -28,6 +28,11 @@ class FailingModel:
         raise RuntimeError("temporary upstream failure")
 
 
+class EmptyResponseModel:
+    async def generate_content_async(self, prompt):
+        return type("Response", (), {"text": "   "})()
+
+
 def test_chat_strips_prompt_before_generation():
     bot = ChatBot.__new__(ChatBot)
     bot.model = FakeModel()
@@ -44,3 +49,12 @@ def test_chat_returns_friendly_error_on_generation_failure():
     result = asyncio.run(bot.chat("hello"))
 
     assert result == "Bot Error: temporary upstream failure"
+
+
+def test_chat_handles_empty_model_response():
+    bot = ChatBot.__new__(ChatBot)
+    bot.model = EmptyResponseModel()
+
+    result = asyncio.run(bot.chat("hello"))
+
+    assert result == "Bot Error: Gemini returned an empty response."
