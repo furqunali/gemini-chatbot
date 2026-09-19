@@ -9,7 +9,6 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
-
 class ChatBot:
     """Small async wrapper around the Gemini text-generation API."""
 
@@ -21,7 +20,10 @@ class ChatBot:
             )
 
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel(model_name or GEMINI_MODEL)
+        selected_model = (model_name or GEMINI_MODEL).strip()
+        if not selected_model:
+            raise ValueError("GEMINI_MODEL must not be empty.")
+        self.model = genai.GenerativeModel(selected_model)
 
     async def chat(self, prompt):
         """Generate a response for a single user prompt."""
@@ -38,7 +40,6 @@ class ChatBot:
         except Exception as exc:
             return f"Bot Error: {exc}"
 
-
 async def main():
     bot = ChatBot()
     print("Gemini Bot: Hello! Type 'quit' to exit.\n")
@@ -53,7 +54,6 @@ async def main():
         except Exception as exc:
             response = f"Bot Error: {exc}"
         print(f"Bot: {response}\n")
-
 
 if __name__ == "__main__":
     asyncio.run(main())
