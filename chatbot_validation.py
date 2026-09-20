@@ -13,7 +13,7 @@ def validate_prompt(prompt: object) -> str:
         raise TypeError("prompt must be a string")
     value = prompt.strip()
     if len(value) > MAX_PROMPT_LENGTH:
-        raise ValueError(f"prompt must be at most {MAX_PROMPT_LENGTH} characters")
+        raise ValueError(f"prompt is too long; it must be at most {MAX_PROMPT_LENGTH} characters")
     return value
 
 
