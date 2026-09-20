@@ -22,7 +22,7 @@ Create a `.env` file:
 
 ```env
 GEMINI_API_KEY=your-gemini-api-key
-GEMINI_MODEL=gemini-1.5-flash
+GEMINI_MODEL=gemini-3.8-flash
 ```
 
 Run the chatbot:
