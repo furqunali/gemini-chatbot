@@ -14,6 +14,7 @@ def test_requires_api_key(monkeypatch):
 
 def test_empty_prompt_returns_helpful_message(monkeypatch):
     monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr("projects12.build_model", lambda key, model: FakeModel())
     bot = ChatBot()
     assert asyncio.run(bot.chat("   ")) == "Please enter a message."
 
@@ -64,17 +65,46 @@ def test_chat_handles_empty_model_response():
 def test_model_override_is_trimmed_and_used(monkeypatch):
     captured = {}
     monkeypatch.setenv("GEMINI_API_KEY", "test-key")
-    monkeypatch.setattr("projects12.genai.configure", lambda api_key: None)
-    monkeypatch.setattr("projects12.genai.GenerativeModel", lambda name: captured.setdefault("name", name))
+    monkeypatch.setattr(
+        "projects12.build_model",
+        lambda api_key, model_name: captured.setdefault("args", (api_key, model_name)) or FakeModel(),
+    )
     bot = ChatBot(model_name="  gemini-test-model  ")
-    assert captured["name"] == "gemini-test-model"
-    assert bot.model == "gemini-test-model"
+    assert captured["args"] == ("test-key", "gemini-test-model")
 
 
 def test_blank_model_override_is_rejected(monkeypatch):
     monkeypatch.setenv("GEMINI_API_KEY", "test-key")
     with pytest.raises(ValueError, match="GEMINI_MODEL must not be empty"):
         ChatBot(model_name="   ")
+
+
+def test_google_genai_provider_adapter(monkeypatch):
+    calls = {}
+
+    class Models:
+        async def generate_content(self, **kwargs):
+            calls["kwargs"] = kwargs
+            return type("Response", (), {"text": "provider response"})()
+
+    class Aio:
+        models = Models()
+
+    class Client:
+        def __init__(self, api_key):
+            calls["api_key"] = api_key
+            self.aio = Aio()
+
+    monkeypatch.setattr("gemini_provider.genai.Client", Client)
+
+    from gemini_provider import build_model
+
+    model = build_model("test-key", "gemini-test")
+    result = asyncio.run(model.generate_content_async("hello"))
+
+    assert result.text == "provider response"
+    assert calls["api_key"] == "test-key"
+    assert calls["kwargs"] == {"model": "gemini-test", "contents": "hello"}
 
 
 def test_main_reports_startup_error(monkeypatch, capsys):

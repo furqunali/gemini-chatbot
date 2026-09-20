@@ -1,10 +1,10 @@
 """Command-line entry point for the async Gemini chatbot."""
 from __future__ import annotations
 import argparse, asyncio
-from chatbot_config import get_model_name
+from chatbot_config import get_model_name, get_api_key
 from chatbot_service import ChatService
 from chatbot_validation import is_exit_command, validate_prompt
-from chatbot_config import get_api_key
+from gemini_provider import build_model
 
 def build_parser():
     p=argparse.ArgumentParser(description="Chat with Gemini from a terminal")
@@ -12,9 +12,7 @@ def build_parser():
     return p
 
 async def build_service(model_name):
-    import google.generativeai as genai
-    genai.configure(api_key=get_api_key())
-    return ChatService(genai.GenerativeModel(model_name))
+    return ChatService(build_model(get_api_key(), model_name))
 
 async def run_once(prompt, model_name):
     return await (await build_service(model_name)).generate(prompt)
@@ -40,7 +38,6 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
-
 
 async def run_cli(bot=None):
     """Backward-compatible interactive loop used by the legacy entry point."""
