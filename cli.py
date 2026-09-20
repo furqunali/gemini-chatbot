@@ -1,33 +1,42 @@
-"""Interactive command-line loop for the Gemini chatbot."""
+"""Command-line entry point for the async Gemini chatbot."""
 from __future__ import annotations
-import asyncio
-from projects12 import ChatBot
+import argparse, asyncio
+from chatbot_config import get_model_name
+from chatbot_service import ChatService
+from chatbot_validation import is_exit_command, validate_prompt
+from chatbot_config import get_api_key
 
-EXIT_COMMANDS = {"quit", "exit"}
+def build_parser():
+    p=argparse.ArgumentParser(description="Chat with Gemini from a terminal")
+    p.add_argument("--prompt"); p.add_argument("--model")
+    return p
 
-async def run_cli(bot: ChatBot | None = None) -> None:
-    """Run the interactive loop with clean terminal shutdown handling."""
-    try:
-        bot = bot or ChatBot()
-    except Exception as exc:
-        print(f"Gemini Bot: startup error: {exc}")
-        return
-    print("Gemini Bot: Hello! Type 'quit' to exit.\\n")
+async def build_service(model_name):
+    import google.generativeai as genai
+    genai.configure(api_key=get_api_key())
+    return ChatService(genai.GenerativeModel(model_name))
+
+async def run_once(prompt, model_name):
+    return await (await build_service(model_name)).generate(prompt)
+
+async def interactive(model_name):
+    service=await build_service(model_name)
+    print(f"Gemini CLI ({model_name}). Type 'exit' or 'quit' to stop.")
     while True:
-        try:
-            user_input = input("You: ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\\nGemini Bot: Goodbye!")
-            return
-        if user_input.lower() in EXIT_COMMANDS:
-            print("Gemini Bot: Goodbye!")
-            return
-        try:
-            response = await bot.chat(user_input)
-        except Exception as exc:
-            response = f"Bot Error: {exc}"
-        print(f"Bot: {response}\\n")
+        try: raw=input("> ")
+        except (EOFError,KeyboardInterrupt): print(); return 0
+        prompt=validate_prompt(raw)
+        if is_exit_command(prompt): return 0
+        if not prompt: print("Please enter a message."); continue
+        print(await service.generate(prompt))
 
+def main():
+    a=build_parser().parse_args(); model=get_model_name(a.model)
+    if a.prompt is not None:
+        prompt=validate_prompt(a.prompt)
+        if not prompt: print("Please enter a message."); return 0
+        print(asyncio.run(run_once(prompt,model))); return 0
+    return asyncio.run(interactive(model))
 
-def main() -> None:
-    asyncio.run(run_cli())
+if __name__=="__main__":
+    raise SystemExit(main())
