@@ -20,7 +20,11 @@ def get_api_key() -> str:
 
 def get_model_name(override: str | None = None) -> str:
     """Resolve and validate the Gemini model name."""
-    value = (override or os.getenv("GEMINI_MODEL", DEFAULT_MODEL)).strip()
-    if not value:
-        raise ValueError("GEMINI_MODEL must not be empty.")
-    return value
+    if override is not None:
+        value = override.strip()
+        if not value:
+            raise ValueError("GEMINI_MODEL must not be empty.")
+        return value
+
+    value = os.getenv("GEMINI_MODEL", "").strip()
+    return value or DEFAULT_MODEL
