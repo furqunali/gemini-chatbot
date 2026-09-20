@@ -45,7 +45,6 @@ async def test_generate_wraps_provider_failure():
 @pytest.mark.asyncio
 async def test_generate_retries_rate_limit_then_succeeds():
     calls = 0
-    delays = []
 
     class RateLimitError(Exception):
         status_code = 429
@@ -58,23 +57,10 @@ async def test_generate_retries_rate_limit_then_succeeds():
                 raise RateLimitError("busy")
             return type("Response", (), {"text": "ok"})()
 
-    async def sleep(delay):
-        delays.append(delay)
-
     policy = RetryPolicy(max_attempts=2, base_delay=0, jitter=0)
-    service = ChatService(Model(), retry_policy=policy)
-    service.retry_policy = policy
-
-    import retry_policy as retry_module
-    result = await retry_module.run_with_retry(
-        lambda: service.model.generate_content_async("hello"),
-        policy,
-        retryable=lambda exc: getattr(exc, "status_code", None) == 429,
-        sleep=sleep,
-    )
-    assert result.text == "ok"
+    result = await ChatService(Model(), retry_policy=policy).generate("hello")
+    assert result == "ok"
     assert calls == 2
-    assert delays == [0]
 
 
 @pytest.mark.asyncio
