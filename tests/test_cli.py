@@ -1,5 +1,6 @@
 import pytest
 
+from chatbot_service import ChatService
 from cli import build_parser, build_service, run_once
 from chatbot_validation import is_exit_command, validate_prompt
 
@@ -35,13 +36,12 @@ def test_build_service_returns_chat_service(monkeypatch):
 
     service = build_service("test-model")
 
-    assert service.model.__class__.__name__ == "FakeModel"
+    assert isinstance(service, ChatService)
+    assert isinstance(service.model, FakeModel)
 
 
 @pytest.mark.asyncio
 async def test_run_once_uses_sync_service_builder(monkeypatch):
-    monkeypatch.setattr("cli.build_service", lambda model_name: __import__(
-        "chatbot_service"
-    ).ChatService(FakeModel()))
+    monkeypatch.setattr("cli.build_service", lambda model_name: ChatService(FakeModel()))
 
     assert await run_once(" hello ", "test-model") == "reply:hello"
