@@ -1,17 +1,27 @@
 """Provider-independent async chatbot service."""
+
 from __future__ import annotations
+
 from typing import Any
+
 from chatbot_errors import ProviderError
+
 
 EMPTY_RESPONSE = "Bot Error: Gemini returned an empty response."
 
 
 def normalize_prompt(prompt: Any) -> str:
-    return (prompt or "").strip()
+    """Normalize a string prompt and reject unsupported values."""
+    if prompt is None:
+        return ""
+    if not isinstance(prompt, str):
+        raise TypeError("prompt must be a string")
+    return prompt.replace("\\t", "\t").strip()
 
 
 class ChatService:
     """Turn normalized prompts into safe text responses from a model."""
+
     def __init__(self, model: Any) -> None:
         self.model = model
 
