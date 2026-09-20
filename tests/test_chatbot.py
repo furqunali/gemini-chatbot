@@ -2,6 +2,7 @@ import asyncio
 
 import pytest
 
+from chatbot_config import DEFAULT_MODEL
 from projects12 import ChatBot
 
 
@@ -97,3 +98,7 @@ def test_main_exits_cleanly_on_keyboard_interrupt(monkeypatch, capsys):
     monkeypatch.setattr("builtins.input", lambda _prompt: (_ for _ in ()).throw(KeyboardInterrupt))
     asyncio.run(projects12.main())
     assert "Goodbye!" in capsys.readouterr().out
+
+
+def test_default_model_is_current_stable_flash():
+    assert DEFAULT_MODEL == "gemini-3.8-flash"
