@@ -20,7 +20,7 @@ def test_get_model_name_uses_override():
 
 def test_get_model_name_uses_default_when_environment_is_blank(monkeypatch):
     monkeypatch.setenv("GEMINI_MODEL", "   ")
-    assert get_model_name() == "gemini-1.5-flash"
+    assert get_model_name() == "gemini-3.8-flash"
 
 
 def test_get_model_name_rejects_blank_override():
