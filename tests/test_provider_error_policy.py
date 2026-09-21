@@ -66,3 +66,13 @@ def test_deeply_wrapped_provider_status_is_retryable():
     result = classify_provider_error(outer)
     assert result.retryable
     assert result.category == "transient"
+
+
+def test_provider_code_is_used_when_status_code_is_non_numeric():
+    class WrappedServerError(Exception):
+        status_code = "UNAVAILABLE"
+        code = 503
+
+    result = classify_provider_error(WrappedServerError("service unavailable"))
+    assert result.retryable
+    assert result.category == "transient"
