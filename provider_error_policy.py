@@ -16,6 +16,15 @@ def classify_provider_error(error: BaseException) -> ProviderFailure:
     message = str(error).strip() or error.__class__.__name__
     name = error.__class__.__name__.lower()
     text = message.lower()
+    status = getattr(error, "status_code", None)
+    if status is None:
+        status = getattr(error, "code", None)
+    try:
+        status = int(status)
+    except (TypeError, ValueError):
+        status = None
+    if status == 429 or (status is not None and 500 <= status < 600):
+        return ProviderFailure(message, True, "transient")
     if any(token in text or token in name for token in ("timeout", "tempor", "rate limit", "429")):
         return ProviderFailure(message, True, "transient")
     if any(token in text or token in name for token in ("auth", "permission", "401", "403")):
