@@ -23,3 +23,22 @@ def test_unknown_error_is_conservative():
     result = classify_provider_error(RuntimeError("provider exploded"))
     assert not result.retryable
     assert result.category == "unknown"
+
+
+
+def test_structured_rate_limit_status_is_retryable():
+    class RateLimitError(Exception):
+        status_code = 429
+
+    result = classify_provider_error(RateLimitError("quota exceeded"))
+    assert result.retryable
+    assert result.category == "transient"
+
+
+def test_structured_server_status_is_retryable():
+    class ServerError(Exception):
+        status_code = 503
+
+    result = classify_provider_error(ServerError("service unavailable"))
+    assert result.retryable
+    assert result.category == "transient"
