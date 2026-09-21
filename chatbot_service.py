@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from chatbot_errors import ProviderError
+from provider_error_policy import classify_provider_error
 from retry_policy import RetryPolicy, run_with_retry
 
 
@@ -21,15 +22,8 @@ def normalize_prompt(prompt: Any) -> str:
 
 
 def _is_retryable_provider_error(exc: Exception) -> bool:
-    """Retry rate-limit and server-side provider failures, not client errors."""
-    status = getattr(exc, "status_code", None)
-    if status is None:
-        status = getattr(exc, "code", None)
-    try:
-        status = int(status)
-    except (TypeError, ValueError):
-        return False
-    return status == 429 or 500 <= status < 600
+    """Reuse the provider error policy used by the public classifier."""
+    return classify_provider_error(exc).retryable
 
 
 class ChatService:
