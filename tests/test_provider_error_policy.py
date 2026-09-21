@@ -42,3 +42,14 @@ def test_structured_server_status_is_retryable():
     result = classify_provider_error(ServerError("service unavailable"))
     assert result.retryable
     assert result.category == "transient"
+
+
+def test_wrapped_provider_status_is_retryable():
+    class ServerError(Exception):
+        status_code = 503
+
+    wrapped = RuntimeError("provider wrapper")
+    wrapped.__cause__ = ServerError("service unavailable")
+    result = classify_provider_error(wrapped)
+    assert result.retryable
+    assert result.category == "transient"
