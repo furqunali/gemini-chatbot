@@ -79,3 +79,25 @@ async def test_generate_does_not_retry_client_error():
     with pytest.raises(ProviderError, match="bad request"):
         await ChatService(Model(), retry_policy=RetryPolicy(max_attempts=3)).generate("hello")
     assert calls == 1
+
+@pytest.mark.asyncio
+async def test_generate_retries_wrapped_server_error():
+    calls = 0
+
+    class ServerError(Exception):
+        status_code = 503
+
+    class Model:
+        async def generate_content_async(self, prompt):
+            nonlocal calls
+            calls += 1
+            if calls < 2:
+                wrapped = RuntimeError("transport wrapper")
+                wrapped.__cause__ = ServerError("service unavailable")
+                raise wrapped
+            return type("Response", (), {"text": "ok"})()
+
+    policy = RetryPolicy(max_attempts=2, base_delay=0, jitter=0)
+    result = await ChatService(Model(), retry_policy=policy).generate("hello")
+    assert result == "ok"
+    assert calls == 2
