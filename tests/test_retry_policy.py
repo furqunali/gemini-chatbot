@@ -68,3 +68,12 @@ def test_non_retryable_error_is_immediate():
             )
         )
     assert calls == 1
+
+
+def test_invalid_retry_policy_types():
+    with pytest.raises(ValueError, match="positive integer"):
+        RetryPolicy(max_attempts=2.5)
+    with pytest.raises(ValueError, match="positive integer"):
+        RetryPolicy(max_attempts=True)
+    with pytest.raises(ValueError, match="numeric"):
+        RetryPolicy(base_delay="1")

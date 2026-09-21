@@ -19,8 +19,11 @@ class RetryPolicy:
     jitter: float = 0.1
 
     def __post_init__(self) -> None:
-        if self.max_attempts < 1:
-            raise ValueError("max_attempts must be at least 1")
+        if not isinstance(self.max_attempts, int) or isinstance(self.max_attempts, bool) or self.max_attempts < 1:
+            raise ValueError("max_attempts must be a positive integer")
+        for name, value in (("base_delay", self.base_delay), ("max_delay", self.max_delay), ("jitter", self.jitter)):
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                raise ValueError(f"{name} must be numeric")
         if self.base_delay < 0 or self.max_delay < 0:
             raise ValueError("delays must be non-negative")
         if self.max_delay < self.base_delay:
