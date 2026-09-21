@@ -12,16 +12,17 @@ class ProviderFailure:
 
 
 def _status_code(error: BaseException) -> int | None:
-    for current in (error, error.__cause__, error.__context__):
-        if current is None:
-            continue
+    seen: set[int] = set()
+    current: BaseException | None = error
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
         status = getattr(current, "status_code", None)
         if status is None:
             status = getattr(current, "code", None)
         try:
             return int(status)
         except (TypeError, ValueError):
-            continue
+            current = current.__cause__ or current.__context__
     return None
 
 
