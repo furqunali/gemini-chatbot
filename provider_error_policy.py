@@ -16,13 +16,13 @@ def _status_code(error: BaseException) -> int | None:
     current: BaseException | None = error
     while current is not None and id(current) not in seen:
         seen.add(id(current))
-        status = getattr(current, "status_code", None)
-        if status is None:
-            status = getattr(current, "code", None)
-        try:
-            return int(status)
-        except (TypeError, ValueError):
-            current = current.__cause__ or current.__context__
+        for attribute in ("status_code", "code"):
+            status = getattr(current, attribute, None)
+            try:
+                return int(status)
+            except (TypeError, ValueError):
+                continue
+        current = current.__cause__ or current.__context__
     return None
 
 
