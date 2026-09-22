@@ -38,6 +38,8 @@ class RetryPolicy:
         """Return a deterministic-compatible delay for a retry number."""
         if not isinstance(retry_number, int) or isinstance(retry_number, bool) or retry_number < 1:
             raise ValueError("retry_number must be a positive integer")
+        if (not isinstance(random_value, (int, float)) or isinstance(random_value, bool) or not math.isfinite(random_value)):
+            raise ValueError("random_value must be a finite number")
         if not 0 <= random_value <= 1:
             raise ValueError("random_value must be between 0 and 1")
         if self.base_delay == 0:
