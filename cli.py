@@ -60,6 +60,7 @@ def main():
 if __name__ == "__main__":
     raise SystemExit(main())
 
+
 async def run_cli(bot=None):
     """Backward-compatible interactive loop used by the legacy entry point."""
     if bot is None:
@@ -73,15 +74,15 @@ async def run_cli(bot=None):
     print("Gemini Bot: Hello! Type 'quit' to exit.\\n")
     while True:
         try:
-            user_input=input("You: ").strip()
-        except (EOFError,KeyboardInterrupt):
+            user_input = input("You: ").strip()
+        except (EOFError, KeyboardInterrupt):
             print("\\nGemini Bot: Goodbye!")
             return
         if user_input.lower() in {"quit", "exit"}:
             print("Gemini Bot: Goodbye!")
             return
         try:
-            response=await bot.chat(user_input)
+            response = await bot.chat(user_input)
         except Exception as exc:
-            response=f"Bot Error: {exc}"
+            response = f"Bot Error: {exc}"
         print(f"Bot: {response}\\n")
