@@ -89,3 +89,4 @@ def test_invalid_retry_policy_types():
 def test_delay_for_large_retry_number_is_bounded():
     policy = RetryPolicy(base_delay=0.25, max_delay=4.0, jitter=0)
     assert policy.delay_for(10**6) == 4.0
+\n\n@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf"), "0.5", True])\ndef test_delay_for_rejects_invalid_random_value(value):\n    with pytest.raises(ValueError, match="random_value"):\n        RetryPolicy().delay_for(1, value)  # type: ignore[arg-type]\n
