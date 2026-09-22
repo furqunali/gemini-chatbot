@@ -84,3 +84,8 @@ def test_invalid_retry_policy_types():
         RetryPolicy(max_attempts=True)
     with pytest.raises(ValueError, match="numeric"):
         RetryPolicy(base_delay="1")
+
+
+def test_delay_for_large_retry_number_is_bounded():
+    policy = RetryPolicy(base_delay=0.25, max_delay=4.0, jitter=0)
+    assert policy.delay_for(10**6) == 4.0
