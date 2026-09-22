@@ -68,7 +68,7 @@ async def run_cli(bot=None):
 
         try:
             bot = ChatBot()
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - top-level guard surfaces any startup failure to the user
             print(f"Gemini Bot: startup error: {exc}")
             return
     print("Gemini Bot: Hello! Type 'quit' to exit.\\n")
@@ -83,6 +83,6 @@ async def run_cli(bot=None):
             return
         try:
             response = await bot.chat(user_input)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - chat loop must not crash on any provider error
             response = f"Bot Error: {exc}"
         print(f"Bot: {response}\\n")

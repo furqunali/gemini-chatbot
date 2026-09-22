@@ -25,7 +25,7 @@ class RetryPolicy:
             raise ValueError("max_attempts must be a positive integer")
         for name, value in (("base_delay", self.base_delay), ("max_delay", self.max_delay), ("jitter", self.jitter)):
             if not isinstance(value, (int, float)) or isinstance(value, bool):
-                raise ValueError(f"{name} must be numeric")
+                raise ValueError(f"{name} must be numeric")  # noqa: TRY004 - public API contract raises ValueError for all config errors
             if not math.isfinite(value):
                 raise ValueError(f"{name} must be finite")
         if self.base_delay < 0 or self.max_delay < 0:

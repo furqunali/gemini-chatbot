@@ -69,7 +69,7 @@ def test_model_override_is_trimmed_and_used(monkeypatch):
         "projects12.build_model",
         lambda api_key, model_name: captured.setdefault("args", (api_key, model_name)) or FakeModel(),
     )
-    bot = ChatBot(model_name="  gemini-test-model  ")
+    ChatBot(model_name="  gemini-test-model  ")
     assert captured["args"] == ("test-key", "gemini-test-model")
 
 

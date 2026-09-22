@@ -24,14 +24,14 @@ class ChatBot:
         service = getattr(self, "_service", ChatService(self.model))
         try:
             return await service.generate(prompt)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - never leak a raw traceback to the caller
             return f"Bot Error: {exc}"
 
 async def main():
     from cli import run_cli
     try:
         bot = ChatBot()
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - top-level guard surfaces any startup failure to the user
         print(f"Gemini Bot: startup error: {exc}")
         return
     await run_cli(bot)
