@@ -22,7 +22,7 @@ Create a `.env` file:
 
 ```env
 GEMINI_API_KEY=your-gemini-api-key
-GEMINI_MODEL=gemini-1.5-flash
+GEMINI_MODEL=gemini-3.8-flash
 ```
 
 Run the chatbot:
@@ -39,6 +39,12 @@ pytest
 ```
 
 Never commit a real API key. Use `.env.example` as the template for local configuration.
+
+
+
+## Reliability
+
+Provider failures are classified through a shared retry policy. Transient HTTP-style status codes, including deeply wrapped provider errors, can be retried with bounded backoff, while non-retryable failures are surfaced without unnecessary retries. Retry-policy parameters are validated before use.
 
 ---
 
