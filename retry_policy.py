@@ -36,11 +36,16 @@ class RetryPolicy:
 
     def delay_for(self, retry_number: int, random_value: float = 0.5) -> float:
         """Return a deterministic-compatible delay for a retry number."""
-        if retry_number < 1:
-            raise ValueError("retry_number must be positive")
+        if not isinstance(retry_number, int) or isinstance(retry_number, bool) or retry_number < 1:
+            raise ValueError("retry_number must be a positive integer")
         if not 0 <= random_value <= 1:
             raise ValueError("random_value must be between 0 and 1")
-        exponential = min(self.max_delay, self.base_delay * (2 ** (retry_number - 1)))
+        if self.base_delay == 0:
+            exponential = 0.0
+        else:
+            max_exponent = max(0, math.ceil(math.log2(self.max_delay) - math.log2(self.base_delay)))
+            exponent = min(retry_number - 1, max_exponent)
+            exponential = min(self.max_delay, self.base_delay * (2 ** exponent))
         spread = exponential * self.jitter
         return max(0.0, min(self.max_delay, exponential - spread + 2 * spread * random_value))
 
