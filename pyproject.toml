@@ -19,6 +19,7 @@ py-modules = [
   "chatbot_protocol",
   "chatbot_service",
   "chatbot_validation",
+  "context_window",
   "conversation_history",
   "gemini_provider",
   "prompt_template",
