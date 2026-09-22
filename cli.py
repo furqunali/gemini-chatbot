@@ -60,7 +60,6 @@ def main():
 if __name__ == "__main__":
     raise SystemExit(main())
 
-
 async def run_cli(bot=None):
     """Backward-compatible interactive loop used by the legacy entry point."""
     if bot is None:
