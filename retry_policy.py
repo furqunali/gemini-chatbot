@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import asyncio
+import math
 import random
 from typing import Awaitable, Callable, TypeVar
 
@@ -24,6 +25,8 @@ class RetryPolicy:
         for name, value in (("base_delay", self.base_delay), ("max_delay", self.max_delay), ("jitter", self.jitter)):
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 raise ValueError(f"{name} must be numeric")
+            if not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
         if self.base_delay < 0 or self.max_delay < 0:
             raise ValueError("delays must be non-negative")
         if self.max_delay < self.base_delay:
