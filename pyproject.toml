@@ -21,3 +21,12 @@ py-modules = [
   "chatbot_validation",
   "gemini_provider",
 ]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7",
+  "pytest-asyncio>=0.21",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
