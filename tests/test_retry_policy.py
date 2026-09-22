@@ -25,6 +25,13 @@ def test_invalid_policy(kwargs):
         RetryPolicy(**kwargs)
 
 
+@pytest.mark.parametrize("field", ["base_delay", "max_delay", "jitter"])
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+def test_nonfinite_policy_values(field, value):
+    with pytest.raises(ValueError, match="finite"):
+        RetryPolicy(**{field: value})
+
+
 def test_retry_succeeds_after_transient_failures():
     calls = 0
     delays = []
