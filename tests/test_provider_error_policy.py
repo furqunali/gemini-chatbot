@@ -23,3 +23,56 @@ def test_unknown_error_is_conservative():
     result = classify_provider_error(RuntimeError("provider exploded"))
     assert not result.retryable
     assert result.category == "unknown"
+
+
+def test_structured_rate_limit_status_is_retryable():
+    class RateLimitError(Exception):
+        status_code = 429
+
+    result = classify_provider_error(RateLimitError("quota exceeded"))
+    assert result.retryable
+    assert result.category == "transient"
+
+
+def test_structured_server_status_is_retryable():
+    class ServerError(Exception):
+        status_code = 503
+
+    result = classify_provider_error(ServerError("service unavailable"))
+    assert result.retryable
+    assert result.category == "transient"
+
+
+def test_wrapped_provider_status_is_retryable():
+    class ServerError(Exception):
+        status_code = 503
+
+    wrapped = RuntimeError("provider wrapper")
+    wrapped.__cause__ = ServerError("service unavailable")
+    result = classify_provider_error(wrapped)
+    assert result.retryable
+    assert result.category == "transient"
+
+
+def test_deeply_wrapped_provider_status_is_retryable():
+    class ServerError(Exception):
+        status_code = 503
+
+    inner = ServerError("service unavailable")
+    middle = RuntimeError("provider wrapper")
+    middle.__cause__ = inner
+    outer = RuntimeError("transport wrapper")
+    outer.__cause__ = middle
+    result = classify_provider_error(outer)
+    assert result.retryable
+    assert result.category == "transient"
+
+
+def test_provider_code_is_used_when_status_code_is_non_numeric():
+    class WrappedServerError(Exception):
+        status_code = "UNAVAILABLE"
+        code = 503
+
+    result = classify_provider_error(WrappedServerError("service unavailable"))
+    assert result.retryable
+    assert result.category == "transient"
