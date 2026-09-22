@@ -1,5 +1,7 @@
 import pytest
+
 from context_budget import estimate_context_budget
+
 
 def test_budget_estimation():
     result=estimate_context_budget("a"*10, 3)

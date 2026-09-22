@@ -1,4 +1,3 @@
-import pytest
 
 from chatbot_errors import ChatbotError, ConfigurationError, ProviderError
 

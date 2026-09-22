@@ -1,6 +1,8 @@
 import pytest
+
 from response_envelope import ResponseEnvelope
 from response_policy import ResponsePolicy, validate_response
+
 
 def test_grounded_response_requires_citations():
     envelope = ResponseEnvelope("answer", grounded=True)

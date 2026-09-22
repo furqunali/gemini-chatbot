@@ -8,8 +8,6 @@ from chatbot_errors import ProviderError
 from provider_error_policy import classify_provider_error
 from retry_policy import RetryPolicy, run_with_retry
 
-
-
 EMPTY_RESPONSE = "Bot Error: Gemini returned an empty response."
 
 

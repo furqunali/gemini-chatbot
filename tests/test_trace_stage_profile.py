@@ -1,6 +1,7 @@
 from response_trace import TraceEvent, build_trace
 from trace_stage_profile import profile_trace_stages
 
+
 def test_stage_profile_is_sorted_and_detects_repeats():
     trace = build_trace("req-7", [TraceEvent("generate","ok"), TraceEvent("retrieve","ok"), TraceEvent("generate","completed")])
     p = profile_trace_stages(trace)

@@ -1,5 +1,6 @@
 from chatbot_protocol import response_text
 
+
 def test_response_text_preserves_internal_spacing():
     response = type("Response", (), {"text": "hello   world"})()
     assert response_text(response) == "hello   world"

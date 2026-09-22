@@ -3,10 +3,13 @@
 Reusable production utilities for the conversation subsystem.
 """
 from __future__ import annotations
-from dataclasses import dataclass, field
-from typing import Iterable, Mapping, Sequence, Any
-import re
+
 import math
+import re
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass, field
+from typing import Any
+
 
 @dataclass(frozen=True)
 class ConversationRule1:
@@ -14,7 +17,7 @@ class ConversationRule1:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule1":
+    def validate(self) -> ConversationRule1:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -27,7 +30,7 @@ class ConversationRule2:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule2":
+    def validate(self) -> ConversationRule2:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -40,7 +43,7 @@ class ConversationRule3:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule3":
+    def validate(self) -> ConversationRule3:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -53,7 +56,7 @@ class ConversationRule4:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule4":
+    def validate(self) -> ConversationRule4:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -66,7 +69,7 @@ class ConversationRule5:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule5":
+    def validate(self) -> ConversationRule5:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -79,7 +82,7 @@ class ConversationRule6:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule6":
+    def validate(self) -> ConversationRule6:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -92,7 +95,7 @@ class ConversationRule7:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule7":
+    def validate(self) -> ConversationRule7:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -105,7 +108,7 @@ class ConversationRule8:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule8":
+    def validate(self) -> ConversationRule8:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -118,7 +121,7 @@ class ConversationRule9:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule9":
+    def validate(self) -> ConversationRule9:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -131,7 +134,7 @@ class ConversationRule10:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule10":
+    def validate(self) -> ConversationRule10:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -144,7 +147,7 @@ class ConversationRule11:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule11":
+    def validate(self) -> ConversationRule11:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -157,7 +160,7 @@ class ConversationRule12:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule12":
+    def validate(self) -> ConversationRule12:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -170,7 +173,7 @@ class ConversationRule13:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule13":
+    def validate(self) -> ConversationRule13:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -183,7 +186,7 @@ class ConversationRule14:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule14":
+    def validate(self) -> ConversationRule14:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -196,7 +199,7 @@ class ConversationRule15:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule15":
+    def validate(self) -> ConversationRule15:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -209,7 +212,7 @@ class ConversationRule16:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule16":
+    def validate(self) -> ConversationRule16:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -222,7 +225,7 @@ class ConversationRule17:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule17":
+    def validate(self) -> ConversationRule17:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -235,7 +238,7 @@ class ConversationRule18:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule18":
+    def validate(self) -> ConversationRule18:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -248,7 +251,7 @@ class ConversationRule19:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule19":
+    def validate(self) -> ConversationRule19:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -261,7 +264,7 @@ class ConversationRule20:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule20":
+    def validate(self) -> ConversationRule20:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -274,7 +277,7 @@ class ConversationRule21:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule21":
+    def validate(self) -> ConversationRule21:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -287,7 +290,7 @@ class ConversationRule22:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule22":
+    def validate(self) -> ConversationRule22:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -300,7 +303,7 @@ class ConversationRule23:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule23":
+    def validate(self) -> ConversationRule23:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -313,7 +316,7 @@ class ConversationRule24:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule24":
+    def validate(self) -> ConversationRule24:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -326,7 +329,7 @@ class ConversationRule25:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule25":
+    def validate(self) -> ConversationRule25:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -339,7 +342,7 @@ class ConversationRule26:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule26":
+    def validate(self) -> ConversationRule26:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -352,7 +355,7 @@ class ConversationRule27:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule27":
+    def validate(self) -> ConversationRule27:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -365,7 +368,7 @@ class ConversationRule28:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule28":
+    def validate(self) -> ConversationRule28:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -378,7 +381,7 @@ class ConversationRule29:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule29":
+    def validate(self) -> ConversationRule29:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -391,7 +394,7 @@ class ConversationRule30:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule30":
+    def validate(self) -> ConversationRule30:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -404,7 +407,7 @@ class ConversationRule31:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule31":
+    def validate(self) -> ConversationRule31:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -417,7 +420,7 @@ class ConversationRule32:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule32":
+    def validate(self) -> ConversationRule32:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -430,7 +433,7 @@ class ConversationRule33:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule33":
+    def validate(self) -> ConversationRule33:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -443,7 +446,7 @@ class ConversationRule34:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule34":
+    def validate(self) -> ConversationRule34:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -456,7 +459,7 @@ class ConversationRule35:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule35":
+    def validate(self) -> ConversationRule35:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -469,7 +472,7 @@ class ConversationRule36:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule36":
+    def validate(self) -> ConversationRule36:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -482,7 +485,7 @@ class ConversationRule37:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule37":
+    def validate(self) -> ConversationRule37:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -495,7 +498,7 @@ class ConversationRule38:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule38":
+    def validate(self) -> ConversationRule38:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -508,7 +511,7 @@ class ConversationRule39:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule39":
+    def validate(self) -> ConversationRule39:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -521,7 +524,7 @@ class ConversationRule40:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule40":
+    def validate(self) -> ConversationRule40:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -534,7 +537,7 @@ class ConversationRule41:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule41":
+    def validate(self) -> ConversationRule41:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -547,7 +550,7 @@ class ConversationRule42:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule42":
+    def validate(self) -> ConversationRule42:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -560,7 +563,7 @@ class ConversationRule43:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule43":
+    def validate(self) -> ConversationRule43:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -573,7 +576,7 @@ class ConversationRule44:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule44":
+    def validate(self) -> ConversationRule44:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -586,7 +589,7 @@ class ConversationRule45:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule45":
+    def validate(self) -> ConversationRule45:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -599,7 +602,7 @@ class ConversationRule46:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule46":
+    def validate(self) -> ConversationRule46:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -612,7 +615,7 @@ class ConversationRule47:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule47":
+    def validate(self) -> ConversationRule47:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -625,7 +628,7 @@ class ConversationRule48:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule48":
+    def validate(self) -> ConversationRule48:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -638,7 +641,7 @@ class ConversationRule49:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule49":
+    def validate(self) -> ConversationRule49:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -651,7 +654,7 @@ class ConversationRule50:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule50":
+    def validate(self) -> ConversationRule50:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -664,7 +667,7 @@ class ConversationRule51:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule51":
+    def validate(self) -> ConversationRule51:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -677,7 +680,7 @@ class ConversationRule52:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule52":
+    def validate(self) -> ConversationRule52:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -690,7 +693,7 @@ class ConversationRule53:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule53":
+    def validate(self) -> ConversationRule53:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -703,7 +706,7 @@ class ConversationRule54:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule54":
+    def validate(self) -> ConversationRule54:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -716,7 +719,7 @@ class ConversationRule55:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule55":
+    def validate(self) -> ConversationRule55:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -729,7 +732,7 @@ class ConversationRule56:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule56":
+    def validate(self) -> ConversationRule56:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -742,7 +745,7 @@ class ConversationRule57:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule57":
+    def validate(self) -> ConversationRule57:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -755,7 +758,7 @@ class ConversationRule58:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule58":
+    def validate(self) -> ConversationRule58:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -768,7 +771,7 @@ class ConversationRule59:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule59":
+    def validate(self) -> ConversationRule59:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -781,7 +784,7 @@ class ConversationRule60:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule60":
+    def validate(self) -> ConversationRule60:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -794,7 +797,7 @@ class ConversationRule61:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule61":
+    def validate(self) -> ConversationRule61:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -807,7 +810,7 @@ class ConversationRule62:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule62":
+    def validate(self) -> ConversationRule62:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -820,7 +823,7 @@ class ConversationRule63:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule63":
+    def validate(self) -> ConversationRule63:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -833,7 +836,7 @@ class ConversationRule64:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule64":
+    def validate(self) -> ConversationRule64:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -846,7 +849,7 @@ class ConversationRule65:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule65":
+    def validate(self) -> ConversationRule65:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -859,7 +862,7 @@ class ConversationRule66:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule66":
+    def validate(self) -> ConversationRule66:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -872,7 +875,7 @@ class ConversationRule67:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule67":
+    def validate(self) -> ConversationRule67:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -885,7 +888,7 @@ class ConversationRule68:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule68":
+    def validate(self) -> ConversationRule68:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -898,7 +901,7 @@ class ConversationRule69:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule69":
+    def validate(self) -> ConversationRule69:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -911,7 +914,7 @@ class ConversationRule70:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule70":
+    def validate(self) -> ConversationRule70:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -924,7 +927,7 @@ class ConversationRule71:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule71":
+    def validate(self) -> ConversationRule71:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -937,7 +940,7 @@ class ConversationRule72:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule72":
+    def validate(self) -> ConversationRule72:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -950,7 +953,7 @@ class ConversationRule73:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule73":
+    def validate(self) -> ConversationRule73:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -963,7 +966,7 @@ class ConversationRule74:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule74":
+    def validate(self) -> ConversationRule74:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -976,7 +979,7 @@ class ConversationRule75:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule75":
+    def validate(self) -> ConversationRule75:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -989,7 +992,7 @@ class ConversationRule76:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule76":
+    def validate(self) -> ConversationRule76:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1002,7 +1005,7 @@ class ConversationRule77:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule77":
+    def validate(self) -> ConversationRule77:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1015,7 +1018,7 @@ class ConversationRule78:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule78":
+    def validate(self) -> ConversationRule78:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1028,7 +1031,7 @@ class ConversationRule79:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule79":
+    def validate(self) -> ConversationRule79:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1041,7 +1044,7 @@ class ConversationRule80:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "ConversationRule80":
+    def validate(self) -> ConversationRule80:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:

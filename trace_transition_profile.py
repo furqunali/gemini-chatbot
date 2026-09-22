@@ -1,8 +1,11 @@
 """Deterministic transition metrics for response traces."""
 from __future__ import annotations
+
 from collections import Counter
 from dataclasses import dataclass
+
 from response_trace import ResponseTrace
+
 
 @dataclass(frozen=True)
 class TraceTransitionProfile:

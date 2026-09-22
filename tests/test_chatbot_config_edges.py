@@ -1,5 +1,5 @@
-import os
 from chatbot_config import get_api_key, get_model_name
+
 
 def test_model_name_uses_default_when_missing(monkeypatch):
     monkeypatch.delenv("GEMINI_MODEL", raising=False)

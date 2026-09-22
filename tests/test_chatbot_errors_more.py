@@ -1,5 +1,5 @@
-import pytest
 from chatbot_errors import ChatbotError, ConfigurationError, ProviderError
+
 
 def test_configuration_error_is_chatbot_error():
     error = ConfigurationError("missing key")

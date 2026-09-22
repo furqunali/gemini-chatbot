@@ -1,6 +1,7 @@
 from evidence_validation import evidence_issues, is_valid_evidence
 from response_evidence import EvidenceSummary
 
+
 def test_grounded_response_requires_citations():
     summary=EvidenceSummary(0,(),True)
     assert evidence_issues(summary)==("grounded response has no citations",)

@@ -1,6 +1,7 @@
 from response_trace import ResponseTrace, TraceEvent
 from trace_validation_gate import validate_trace
 
+
 def test_completed_trace_passes():
     result = validate_trace(ResponseTrace("r", (TraceEvent("answer", "completed", "ok"),)))
     assert result.passed and result.blank_details == 0

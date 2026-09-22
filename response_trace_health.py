@@ -1,7 +1,10 @@
 """Deterministic health classification for response execution traces."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from response_trace import ResponseTrace
+
 
 @dataclass(frozen=True)
 class TraceHealth:

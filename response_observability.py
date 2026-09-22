@@ -1,7 +1,10 @@
 """Compact response metrics for provider-neutral chatbot observability."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from response_envelope import ResponseEnvelope
+
 
 @dataclass(frozen=True)
 class ResponseMetrics:

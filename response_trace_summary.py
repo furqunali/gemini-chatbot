@@ -1,7 +1,10 @@
 """Aggregate deterministic response trace health metrics."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from response_trace_health import TraceHealth
+
 
 @dataclass(frozen=True)
 class TraceSummary:

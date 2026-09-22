@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from chatbot_service import ChatService, normalize_prompt, EMPTY_RESPONSE
+from chatbot_service import EMPTY_RESPONSE, ChatService, normalize_prompt
 
 
 def test_normalize_prompt_rejects_non_string_values():

@@ -1,6 +1,8 @@
 """Small contracts shared by chatbot providers and services."""
 from __future__ import annotations
-from typing import Protocol, Any
+
+from typing import Any, Protocol
+
 
 class AsyncTextModel(Protocol):
     async def generate_content_async(self, prompt: str) -> Any:

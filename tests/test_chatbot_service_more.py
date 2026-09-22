@@ -1,6 +1,9 @@
 import asyncio
+
 import pytest
+
 from chatbot_service import ChatService, normalize_prompt
+
 
 def test_normalize_prompt_strips_tabs():
     assert normalize_prompt("\\t hello \\t") == "hello"

@@ -18,7 +18,7 @@ class RequestContext:
         if any(not isinstance(v, str) for v in self.metadata.values()):
             raise TypeError("metadata values must be strings")
 
-    def with_metadata(self, **values: str) -> "RequestContext":
+    def with_metadata(self, **values: str) -> RequestContext:
         if any(not isinstance(v, str) for v in values.values()):
             raise TypeError("metadata values must be strings")
         merged = {**self.metadata, **values}

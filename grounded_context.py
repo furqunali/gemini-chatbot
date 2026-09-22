@@ -1,6 +1,8 @@
 """Provider-neutral formatting for grounded generation context."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class ContextItem:
