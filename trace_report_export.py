@@ -1,9 +1,12 @@
 """Stable JSON export for response-trace validation results."""
 from __future__ import annotations
+
 import json
 from dataclasses import asdict
-from trace_validation_gate import TraceValidation
+
 from trace_report_schema import validate_trace_report
+from trace_validation_gate import TraceValidation
+
 
 def trace_report_dict(result: TraceValidation) -> dict:
     if not isinstance(result, TraceValidation):

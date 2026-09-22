@@ -1,6 +1,8 @@
 """Estimate grounded prompt size before provider invocation."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class ContextBudget:

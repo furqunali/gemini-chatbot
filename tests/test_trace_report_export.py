@@ -1,5 +1,6 @@
-from trace_validation_gate import TraceValidation
 from trace_report_export import trace_report_dict, trace_report_json
+from trace_validation_gate import TraceValidation
+
 
 def test_trace_export_is_deterministic():
     result = TraceValidation(2, 1, False)

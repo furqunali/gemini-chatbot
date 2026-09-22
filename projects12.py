@@ -1,10 +1,14 @@
 """Gemini chatbot API and backwards-compatible CLI entry point."""
 from __future__ import annotations
+
 import asyncio
+
 from dotenv import load_dotenv
+
 from chatbot_config import get_api_key, get_model_name
 from chatbot_service import ChatService
 from gemini_provider import build_model
+
 load_dotenv()
 
 class ChatBot:

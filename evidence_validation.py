@@ -1,6 +1,8 @@
 """Validation rules for grounded response evidence."""
 from __future__ import annotations
+
 from response_evidence import EvidenceSummary
+
 
 def evidence_issues(summary: EvidenceSummary) -> tuple[str, ...]:
     issues=[]

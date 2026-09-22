@@ -1,8 +1,8 @@
 import pytest
 
 from chatbot_service import ChatService
-from cli import build_parser, build_service, run_once
 from chatbot_validation import is_exit_command, validate_prompt
+from cli import build_parser, build_service, run_once
 
 
 class FakeModel:

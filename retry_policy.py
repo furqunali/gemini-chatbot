@@ -1,11 +1,12 @@
 """Bounded retry policy for transient model-provider failures."""
 from __future__ import annotations
 
-from dataclasses import dataclass
 import asyncio
 import math
 import random
-from typing import Awaitable, Callable, TypeVar
+from collections.abc import Awaitable, Callable
+from dataclasses import dataclass
+from typing import TypeVar
 
 T = TypeVar("T")
 

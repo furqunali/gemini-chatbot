@@ -1,6 +1,8 @@
 """Provider-neutral evidence summary for grounded responses."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class EvidenceSummary:

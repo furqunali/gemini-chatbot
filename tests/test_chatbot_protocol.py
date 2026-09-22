@@ -1,4 +1,3 @@
-import pytest
 
 from chatbot_protocol import response_text
 

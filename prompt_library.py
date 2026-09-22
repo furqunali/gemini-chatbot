@@ -3,10 +3,13 @@
 Reusable production utilities for the prompt subsystem.
 """
 from __future__ import annotations
-from dataclasses import dataclass, field
-from typing import Iterable, Mapping, Sequence, Any
-import re
+
 import math
+import re
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass, field
+from typing import Any
+
 
 @dataclass(frozen=True)
 class PromptRule1:
@@ -14,7 +17,7 @@ class PromptRule1:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule1":
+    def validate(self) -> PromptRule1:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -27,7 +30,7 @@ class PromptRule2:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule2":
+    def validate(self) -> PromptRule2:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -40,7 +43,7 @@ class PromptRule3:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule3":
+    def validate(self) -> PromptRule3:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -53,7 +56,7 @@ class PromptRule4:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule4":
+    def validate(self) -> PromptRule4:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -66,7 +69,7 @@ class PromptRule5:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule5":
+    def validate(self) -> PromptRule5:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -79,7 +82,7 @@ class PromptRule6:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule6":
+    def validate(self) -> PromptRule6:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -92,7 +95,7 @@ class PromptRule7:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule7":
+    def validate(self) -> PromptRule7:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -105,7 +108,7 @@ class PromptRule8:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule8":
+    def validate(self) -> PromptRule8:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -118,7 +121,7 @@ class PromptRule9:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule9":
+    def validate(self) -> PromptRule9:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -131,7 +134,7 @@ class PromptRule10:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule10":
+    def validate(self) -> PromptRule10:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -144,7 +147,7 @@ class PromptRule11:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule11":
+    def validate(self) -> PromptRule11:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -157,7 +160,7 @@ class PromptRule12:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule12":
+    def validate(self) -> PromptRule12:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -170,7 +173,7 @@ class PromptRule13:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule13":
+    def validate(self) -> PromptRule13:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -183,7 +186,7 @@ class PromptRule14:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule14":
+    def validate(self) -> PromptRule14:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -196,7 +199,7 @@ class PromptRule15:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule15":
+    def validate(self) -> PromptRule15:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -209,7 +212,7 @@ class PromptRule16:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule16":
+    def validate(self) -> PromptRule16:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -222,7 +225,7 @@ class PromptRule17:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule17":
+    def validate(self) -> PromptRule17:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -235,7 +238,7 @@ class PromptRule18:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule18":
+    def validate(self) -> PromptRule18:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -248,7 +251,7 @@ class PromptRule19:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule19":
+    def validate(self) -> PromptRule19:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -261,7 +264,7 @@ class PromptRule20:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule20":
+    def validate(self) -> PromptRule20:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -274,7 +277,7 @@ class PromptRule21:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule21":
+    def validate(self) -> PromptRule21:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -287,7 +290,7 @@ class PromptRule22:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule22":
+    def validate(self) -> PromptRule22:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -300,7 +303,7 @@ class PromptRule23:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule23":
+    def validate(self) -> PromptRule23:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -313,7 +316,7 @@ class PromptRule24:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule24":
+    def validate(self) -> PromptRule24:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -326,7 +329,7 @@ class PromptRule25:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule25":
+    def validate(self) -> PromptRule25:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -339,7 +342,7 @@ class PromptRule26:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule26":
+    def validate(self) -> PromptRule26:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -352,7 +355,7 @@ class PromptRule27:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule27":
+    def validate(self) -> PromptRule27:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -365,7 +368,7 @@ class PromptRule28:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule28":
+    def validate(self) -> PromptRule28:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -378,7 +381,7 @@ class PromptRule29:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule29":
+    def validate(self) -> PromptRule29:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -391,7 +394,7 @@ class PromptRule30:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule30":
+    def validate(self) -> PromptRule30:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -404,7 +407,7 @@ class PromptRule31:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule31":
+    def validate(self) -> PromptRule31:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -417,7 +420,7 @@ class PromptRule32:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule32":
+    def validate(self) -> PromptRule32:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -430,7 +433,7 @@ class PromptRule33:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule33":
+    def validate(self) -> PromptRule33:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -443,7 +446,7 @@ class PromptRule34:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule34":
+    def validate(self) -> PromptRule34:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -456,7 +459,7 @@ class PromptRule35:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule35":
+    def validate(self) -> PromptRule35:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -469,7 +472,7 @@ class PromptRule36:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule36":
+    def validate(self) -> PromptRule36:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -482,7 +485,7 @@ class PromptRule37:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule37":
+    def validate(self) -> PromptRule37:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -495,7 +498,7 @@ class PromptRule38:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule38":
+    def validate(self) -> PromptRule38:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -508,7 +511,7 @@ class PromptRule39:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule39":
+    def validate(self) -> PromptRule39:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -521,7 +524,7 @@ class PromptRule40:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule40":
+    def validate(self) -> PromptRule40:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -534,7 +537,7 @@ class PromptRule41:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule41":
+    def validate(self) -> PromptRule41:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -547,7 +550,7 @@ class PromptRule42:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule42":
+    def validate(self) -> PromptRule42:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -560,7 +563,7 @@ class PromptRule43:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule43":
+    def validate(self) -> PromptRule43:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -573,7 +576,7 @@ class PromptRule44:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule44":
+    def validate(self) -> PromptRule44:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -586,7 +589,7 @@ class PromptRule45:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule45":
+    def validate(self) -> PromptRule45:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -599,7 +602,7 @@ class PromptRule46:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule46":
+    def validate(self) -> PromptRule46:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -612,7 +615,7 @@ class PromptRule47:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule47":
+    def validate(self) -> PromptRule47:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -625,7 +628,7 @@ class PromptRule48:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule48":
+    def validate(self) -> PromptRule48:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -638,7 +641,7 @@ class PromptRule49:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule49":
+    def validate(self) -> PromptRule49:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -651,7 +654,7 @@ class PromptRule50:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule50":
+    def validate(self) -> PromptRule50:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -664,7 +667,7 @@ class PromptRule51:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule51":
+    def validate(self) -> PromptRule51:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -677,7 +680,7 @@ class PromptRule52:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule52":
+    def validate(self) -> PromptRule52:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -690,7 +693,7 @@ class PromptRule53:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule53":
+    def validate(self) -> PromptRule53:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -703,7 +706,7 @@ class PromptRule54:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule54":
+    def validate(self) -> PromptRule54:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -716,7 +719,7 @@ class PromptRule55:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule55":
+    def validate(self) -> PromptRule55:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -729,7 +732,7 @@ class PromptRule56:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule56":
+    def validate(self) -> PromptRule56:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -742,7 +745,7 @@ class PromptRule57:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule57":
+    def validate(self) -> PromptRule57:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -755,7 +758,7 @@ class PromptRule58:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule58":
+    def validate(self) -> PromptRule58:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -768,7 +771,7 @@ class PromptRule59:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule59":
+    def validate(self) -> PromptRule59:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -781,7 +784,7 @@ class PromptRule60:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule60":
+    def validate(self) -> PromptRule60:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -794,7 +797,7 @@ class PromptRule61:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule61":
+    def validate(self) -> PromptRule61:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -807,7 +810,7 @@ class PromptRule62:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule62":
+    def validate(self) -> PromptRule62:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -820,7 +823,7 @@ class PromptRule63:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule63":
+    def validate(self) -> PromptRule63:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -833,7 +836,7 @@ class PromptRule64:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule64":
+    def validate(self) -> PromptRule64:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -846,7 +849,7 @@ class PromptRule65:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule65":
+    def validate(self) -> PromptRule65:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -859,7 +862,7 @@ class PromptRule66:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule66":
+    def validate(self) -> PromptRule66:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -872,7 +875,7 @@ class PromptRule67:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule67":
+    def validate(self) -> PromptRule67:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -885,7 +888,7 @@ class PromptRule68:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule68":
+    def validate(self) -> PromptRule68:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -898,7 +901,7 @@ class PromptRule69:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule69":
+    def validate(self) -> PromptRule69:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -911,7 +914,7 @@ class PromptRule70:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule70":
+    def validate(self) -> PromptRule70:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -924,7 +927,7 @@ class PromptRule71:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule71":
+    def validate(self) -> PromptRule71:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -937,7 +940,7 @@ class PromptRule72:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule72":
+    def validate(self) -> PromptRule72:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -950,7 +953,7 @@ class PromptRule73:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule73":
+    def validate(self) -> PromptRule73:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -963,7 +966,7 @@ class PromptRule74:
     weight: float = 0.5
     enabled: bool = True
 
-    def validate(self) -> "PromptRule74":
+    def validate(self) -> PromptRule74:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -976,7 +979,7 @@ class PromptRule75:
     weight: float = 0.6
     enabled: bool = True
 
-    def validate(self) -> "PromptRule75":
+    def validate(self) -> PromptRule75:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -989,7 +992,7 @@ class PromptRule76:
     weight: float = 0.7
     enabled: bool = True
 
-    def validate(self) -> "PromptRule76":
+    def validate(self) -> PromptRule76:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1002,7 +1005,7 @@ class PromptRule77:
     weight: float = 0.1
     enabled: bool = True
 
-    def validate(self) -> "PromptRule77":
+    def validate(self) -> PromptRule77:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1015,7 +1018,7 @@ class PromptRule78:
     weight: float = 0.2
     enabled: bool = True
 
-    def validate(self) -> "PromptRule78":
+    def validate(self) -> PromptRule78:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1028,7 +1031,7 @@ class PromptRule79:
     weight: float = 0.3
     enabled: bool = True
 
-    def validate(self) -> "PromptRule79":
+    def validate(self) -> PromptRule79:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:
@@ -1041,7 +1044,7 @@ class PromptRule80:
     weight: float = 0.4
     enabled: bool = True
 
-    def validate(self) -> "PromptRule80":
+    def validate(self) -> PromptRule80:
         if not self.name.strip():
             raise ValueError("rule name must not be empty")
         if not math.isfinite(self.weight) or self.weight < 0:

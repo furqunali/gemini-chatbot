@@ -1,5 +1,7 @@
 import pytest
-from chatbot_validation import validate_prompt, is_exit_command, MAX_PROMPT_LENGTH
+
+from chatbot_validation import MAX_PROMPT_LENGTH, is_exit_command, validate_prompt
+
 
 def test_validate_prompt_keeps_unicode_text():
     assert validate_prompt("  hello 🌍  ") == "hello 🌍"

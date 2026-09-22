@@ -1,6 +1,7 @@
 from response_envelope import ResponseEnvelope
 from response_observability import measure_response
 
+
 def test_measure_response_reports_grounding_and_citations():
     metrics=measure_response(ResponseEnvelope("answer",provider="gemini",grounded=True,citations=("c1","c2")))
     assert metrics.characters==6

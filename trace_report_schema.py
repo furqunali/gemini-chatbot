@@ -1,5 +1,6 @@
 """Schema validation for exported trace validation reports."""
 from __future__ import annotations
+
 REQUIRED_FIELDS = frozenset({"events","blank_details","passed"})
 def validate_trace_report(payload: dict) -> bool:
     if not isinstance(payload, dict) or set(payload) != REQUIRED_FIELDS: return False

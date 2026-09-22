@@ -1,6 +1,8 @@
 """Structured, provider-neutral response execution trace."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class TraceEvent:

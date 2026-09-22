@@ -1,5 +1,7 @@
 import pytest
+
 from grounded_context import ContextItem, build_grounded_prompt
+
 
 def test_build_grounded_prompt_preserves_source_boundaries():
     prompt = build_grounded_prompt("What is RAG?", [ContextItem("docs/rag.md","RAG retrieves context.",2)])

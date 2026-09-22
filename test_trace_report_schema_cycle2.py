@@ -1,5 +1,6 @@
 from trace_report_schema import validate_trace_report
 
+
 def test_trace_report_rejects_blank_details_above_events():
     payload = {"events": 1, "blank_details": 2, "passed": False}
     assert not validate_trace_report(payload)

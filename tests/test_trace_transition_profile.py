@@ -1,6 +1,7 @@
 from response_trace import TraceEvent, build_trace
 from trace_transition_profile import profile_trace_transitions
 
+
 def test_transition_profile_reports_ordered_stage_pairs():
     trace = build_trace("req-1", [TraceEvent("retrieve","ok"),TraceEvent("generate","ok"),TraceEvent("retrieve","ok")])
     p = profile_trace_transitions(trace)

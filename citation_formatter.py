@@ -1,6 +1,7 @@
 """Stable formatting for citations attached to provider responses."""
 from __future__ import annotations
 
+
 def format_citations(citations: tuple[str, ...] | list[str]) -> str:
     normalized=sorted({str(value).strip() for value in citations if str(value).strip()})
     return " ".join(f"[{value}]" for value in normalized)

@@ -1,6 +1,7 @@
 from response_trace import TraceEvent, build_trace
 from response_trace_validation import is_valid_trace, validate_trace
 
+
 def test_trace_validation_accepts_non_terminal_progression():
     trace = build_trace("req-4", [TraceEvent("retrieve", "ok"), TraceEvent("generate", "completed")])
     assert is_valid_trace(trace)
