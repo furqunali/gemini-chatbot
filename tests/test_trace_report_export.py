@@ -14,3 +14,7 @@ def test_trace_export_rejects_wrong_type():
         pass
     else:
         raise AssertionError("expected TypeError")
+
+
+def test_export_enforces_schema():
+    assert trace_report_dict(TraceValidation(1, 0, True))["events"] == 1
