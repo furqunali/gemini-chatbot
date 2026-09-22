@@ -23,6 +23,7 @@ py-modules = [
   "conversation_history",
   "gemini_provider",
   "prompt_template",
+  "stream_aggregator",
 ]
 
 [project.optional-dependencies]
