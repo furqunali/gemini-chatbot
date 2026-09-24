@@ -1,5 +1,7 @@
 # 🤖 Gemini AI Chatbot (Async)
 
+![Lines of code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/furqunali/gemini-chatbot/main/.github/badges/loc.json)
+
 An asynchronous Python chatbot built around Google's Generative AI API.
 
 ## Features
